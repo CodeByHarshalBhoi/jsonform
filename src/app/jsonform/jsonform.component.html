@@ -1,0 +1,13 @@
+<div class="container">
+  <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
+    <div class="container my-3" *ngFor="let field of jsonFormField" [ngSwitch]="field.type">
+        <label>{{field.label}}</label>
+        <textarea *ngSwitchCase="'textarea'" placeholder="{{field.placeholder}}" class="form-control"></textarea>
+        <input class="form-control" *ngSwitchCase="'input'" type="{{field.type}}" >
+        <input class="form-control" *ngSwitchCase="'password'" type="{{field.type}}">
+      
+    </div>
+    <button class="btn btn-primary" type="submit">submit</button>
+
+  </form>
+</div>

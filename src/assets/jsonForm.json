@@ -1,0 +1,64 @@
+{
+  "data":[
+       {
+        "name":"username",
+        "label":"User Name",
+        "value":"",
+        "type":"input",
+        "placeholder":"Enter your name",
+        "validators":[
+          {
+            "required":true
+          }
+        ]
+      },
+      {
+        "name":"password",
+        "label":"Password",
+        "value":"",
+        "placeholder":"Enter password",
+        "type":"password",
+        "validators":[
+          {
+            "required":true
+          }
+        ]
+      },
+      {
+        "name":"city",
+        "label":"City",
+        "value":"",
+        "type":"select",
+        "validators":[
+          {
+            "required":true
+          }
+        ],
+        "options":[
+          {
+            "label":"field 1",
+            "value":"Mumbai"
+          },
+          {
+            "label":"field 2",
+            "value":"Mumbai"
+          }
+        ]
+      },
+      {
+
+        "name":"comment",
+        "label":"Comment",
+        "type":"textarea",
+        "value":"",
+        "placeholder":"Comments",
+        "validators":[
+          {
+            "required":true
+          }
+        ]
+
+      }
+
+  ]
+}
