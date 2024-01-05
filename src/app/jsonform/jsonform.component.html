@@ -1,13 +1,26 @@
 <div class="container">
+  <h2>Component Form</h2>
   <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
     <div class="container my-3" *ngFor="let field of jsonFormField" [ngSwitch]="field.type">
         <label>{{field.label}}</label>
-        <textarea *ngSwitchCase="'textarea'" placeholder="{{field.placeholder}}" class="form-control"></textarea>
         <input class="form-control" *ngSwitchCase="'input'" type="{{field.type}}" >
-        <input class="form-control" *ngSwitchCase="'password'" type="{{field.type}}">
-      
-    </div>
-    <button class="btn btn-primary" type="submit">submit</button>
+        <input class="form-control" *ngSwitchCase="'password'" >
+        <textarea placeholder="{{field.placeholder}}" class="form-control" id="exampleFormControlTextarea1" rows="3" *ngSwitchCase="'textarea'" formControlName="{{field.name}}"></textarea>
 
+
+
+        <div *ngIf="field.type === 'select'" >
+          <!-- <label class="form-label">{{field.label}}</label> -->
+          <select  class="form-select" formControlName="{{field.name}}" aria-label="Default select example">
+            <option selected value="">Choose.....</option>
+              <ng-container *ngFor="let opt of field.options">
+                  <option [value]="opt.value">{{opt.value}}</option>
+              </ng-container>
+          </select>
+        </div>
+        <small class="text-danger" *ngIf="dynamicForm?.get(field.name)?.invalid && dynamicForm?.get(field.name)?.touched">*field is required</small>
+      </div>
+<button type="submit" class="btn btn-primary" [disabled]="dynamicForm.invalid">Primary</button>
+      
   </form>
 </div>

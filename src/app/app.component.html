@@ -5,4 +5,38 @@
   </div>
 </nav>
 
+
+
+<div class="container">
+    <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
+                <div class="container my-3"  *ngFor="let field of formFields" [ngSwitch]="field.type">
+                  <label>{{field.label}}</label>
+                  <textarea placeholder="{{field.placeholder}}" class="form-control" id="exampleFormControlTextarea1" rows="3" *ngSwitchCase="'textArea'" formControlName="{{field.name}}"></textarea>
+                  <input placeholder="{{field.placeholder}}" class="form-control" *ngSwitchCase="'text'" formControlName="{{field.name}}"/>
+
+                  <input placeholder="{{field.placeholder}}" class="form-control" *ngSwitchCase="'number'" formControlName="{{field.name}}"/>
+
+                  <!-- <select class="form-select" *ngSwitchCase="'select'" formControlName="{{field.name}}" aria-label="Default select example">
+                    <option value="-1">Select</option>
+                    <ng-container *ngFor="let opt of field.options">
+                      <option [value]="opt.value">{{opt.value}}</option>
+                  </ng-container>
+                  </select> -->
+
+
+                  <div *ngIf="field.type === 'select'" >
+                    <!-- <label class="form-label">{{field.label}}</label> -->
+                    <select  class="form-select" formControlName="{{field.name}}" aria-label="Default select example">
+                      <option selected value="">Choose.....</option>
+                        <ng-container *ngFor="let opt of field.options">
+                            <option [value]="opt.value">{{opt.value}}</option>
+                        </ng-container>
+                    </select>
+                  </div>
+                  <small class="text-danger" *ngIf="dynamicForm?.get(field.name)?.invalid && dynamicForm?.get(field.name)?.touched">*field is required</small>
+                </div>
+        <button type="submit" class="btn btn-primary" [disabled]="dynamicForm.invalid">Primary</button>
+
+    </form>
+</div>
 <app-jsonform></app-jsonform>
